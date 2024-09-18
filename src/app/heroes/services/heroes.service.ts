@@ -14,5 +14,12 @@ export class HeroesService {
   getHeroes(): Observable<Hero[]> {
     return this.http.get<Hero[]>(`${this.baseUrl}/heroes`);
   }
+
+  getHeroById(id: string): Observable<Hero | undefined> {
+    return this.http.get<Hero>(`${this.baseUrl}/heroes/${id}`)
+      .pipe(
+        catchError(error => of(undefined))
+      );
+  }
 }
 
